@@ -144,7 +144,6 @@ NodeJS Microservices
 ai-auto-healing-platform/
 │
 ├── README.md
-├── LICENSE
 ├── .gitignore
 │
 ├── docs/
