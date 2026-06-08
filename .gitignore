@@ -1,0 +1,85 @@
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+# Terraform variable files may contain credentials or environment-specific values.
+*.tfvars
+*.tfvars.json
+
+# Plans, generated outputs, and local reports
+plan.txt
+tfplan
+*.plan
+*.out
+*.log
+
+# Kubernetes / Helm local artifacts
+kubeconfig
+kubeconfig.*
+*.kubeconfig
+*.tgz
+charts/*.tgz
+
+# Cloud and CLI credentials/config caches
+.aws/
+.azure/
+.kube/
+.config/gcloud/
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*.pub
+
+# Environment files
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# Node / frontend tooling
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+dist/
+build/
+.next/
+.vite/
+coverage/
+
+# Editor and OS files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
