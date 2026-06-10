@@ -50,3 +50,15 @@ variable "min_node_capacity" {
     default     = 1
 }
 
+variable "cluster_endpoint_public_access" {
+    description = "Enable public API server endpoint"
+    type        = bool
+    default     = true
+}
+
+variable "cluster_endpoint_private_access" {
+    description = "Enable private API server endpoint"
+    type        = bool
+    default     = true
+}
+

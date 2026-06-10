@@ -30,3 +30,9 @@ variable "region" {
     type        = string
     default     = "ap-south-2"
 }
+
+variable "environment" {
+    description = "Deployment environment (e.g., dev, staging, prod)"
+    type        = string
+    default     = "dev"
+}
