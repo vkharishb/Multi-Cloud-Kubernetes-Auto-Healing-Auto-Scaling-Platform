@@ -21,10 +21,8 @@ module "aks" {
   kubernetes_version  = var.kubernetes_version    #Kubernetes version for the AKS cluster
 
   #Node pool configuration for the AKS cluster
-  default_node_pool {
-    name       = "default"                      #Name of the default node pool
-    node_count = var.node_count                 #Number of nodes in the default node pool
-    vm_size    = var.vm_size                    #VM size for the nodes in the default node pool
-  }
+  default_node_pool_name       = "default"
+  default_node_pool_node_count = var.node_count
+  default_node_pool_vm_size    = var.vm_size
   
 }
