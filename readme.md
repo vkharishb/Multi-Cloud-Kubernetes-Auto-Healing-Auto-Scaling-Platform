@@ -1,301 +1,227 @@
-# Multi-Cloud Kubernetes Auto-Healing & Auto-Scaling Platform
+# Enterprise Multi-Cloud Kubernetes Platform
 
-## Overview
+## AWS EKS + Azure AKS
 
-A production-grade Multi-Cloud Kubernetes Platform designed to demonstrate modern DevOps, SRE, GitOps, and Cloud Engineering practices across AWS and Azure.
-
-This project focuses on automated deployment, self-healing infrastructure, observability, scalability, incident management, and GitOps-driven operations.
-
-The platform deploys containerized Node.js microservices on Amazon EKS and Azure AKS while leveraging Prometheus, Grafana, Loki, ArgoCD, GitHub Actions, and Jenkins to provide a resilient and highly observable environment.
+### GitOps | Auto-Healing | Auto-Scaling | Observability | Platform Engineering
 
 ---
 
-## Business Problem
+# Overview
 
-Modern applications require:
+Enterprise-grade Multi-Cloud Kubernetes Platform designed to demonstrate modern DevOps, Platform Engineering, GitOps, SRE, and Cloud-Native practices across AWS and Azure.
+
+The platform provisions and manages Amazon EKS and Azure AKS clusters using Terraform, deploys applications through ArgoCD GitOps workflows, enables automated scaling and self-healing, and provides centralized monitoring, logging, and alerting.
+
+This project showcases production-ready Kubernetes architecture, Infrastructure as Code, Continuous Delivery, Multi-Cloud Operations, Disaster Recovery, and Enterprise Observability.
+
+---
+
+# Business Problem
+
+Modern organizations require:
 
 * High Availability
+* Multi-Cloud Resilience
 * Automated Recovery
-* Rapid Deployment
-* Centralized Monitoring
-* Multi-Cloud Support
+* Centralized Observability
+* Rapid Deployments
 * Reduced Operational Overhead
+* Disaster Recovery Readiness
 
-This project addresses these challenges through automated scaling, deployment rollbacks, health monitoring, and GitOps workflows.
+Traditional infrastructure often struggles with scalability, visibility, and recovery.
+
+This platform addresses these challenges through:
+
+* Multi-Cloud Kubernetes
+* GitOps Deployments
+* Auto-Healing Mechanisms
+* Auto-Scaling Capabilities
+* Infrastructure as Code
+* Centralized Monitoring
+* Enterprise Security Controls
 
 ---
 
-## Key Features
+# Key Features
 
-### Multi-Cloud Infrastructure
+## Multi-Cloud Infrastructure
 
-* AWS EKS
+* Amazon EKS
 * Azure AKS
+* Active-Active Architecture
 * Terraform Infrastructure as Code
-* Multi-AZ Deployments
+* Multi-AZ Deployment Strategy
+* Environment Isolation
 
-### Kubernetes Platform
+## Kubernetes Platform
 
-* Kubernetes Deployments
+* Deployments
 * Services
-* Ingress Controller
+* Ingress Controllers
 * ConfigMaps
-* Resource Management
+* Secrets
+* Resource Quotas
+* Pod Disruption Budgets
 * Health Checks
 
-### Auto-Healing
+## GitOps
 
-* Pod Recovery
-* Failed Deployment Detection
-* Automated Rollback
-* Application Redeployment
-* Incident Notification
-
-### Auto-Scaling
-
-* Horizontal Pod Autoscaler (HPA)
-* Cluster Autoscaler
-* Resource-Based Scaling
-* Traffic-Based Scaling
-
-### GitOps
-
-* ArgoCD
+* ArgoCD Multi-Cluster Management
 * App-of-Apps Pattern
 * Automated Synchronization
 * Drift Detection
+* Self-Healing
 
-### CI/CD
+## Auto-Healing
+
+* Pod Recovery
+* Deployment Recovery
+* Automated Rollbacks
+* Application Redeployment
+* Incident Detection
+* Alert-Based Remediation
+
+## Auto-Scaling
+
+* Horizontal Pod Autoscaler
+* Cluster Autoscaler
+* Resource-Based Scaling
+* Traffic-Based Scaling
+* Node Pool Scaling
+
+## CI/CD
 
 * GitHub Actions
 * Jenkins Pipelines
 * Docker Image Build
+* Security Scanning
 * Automated Deployments
+* Rollback Strategy
 
-### Observability
+## Observability
 
 * Prometheus
 * Grafana
 * Loki
 * AlertManager
+* Centralized Dashboards
 
-### Incident Management
+## Security
+
+* IAM Roles
+* RBAC
+* Pod Security Standards
+* Network Policies
+* AWS Secrets Manager
+* Azure Key Vault
+* Trivy Security Scanning
+
+## Incident Management
 
 * Jira Integration
 * Slack Notifications
 * Microsoft Teams Notifications
 
-### Security
-
-* IAM Roles
-* RBAC
-* AWS Secrets Manager
-* Trivy Image Scanning
-
 ---
 
-## Architecture
+# Enterprise Architecture
 
 ```text
-
-Developer
-    |
-GitHub Repository
-    |
-+----------------------+
-| GitHub Actions       |
-| Jenkins              |
-+----------------------+
-          |
-          ▼
-Container Registry
-          |
-          ▼
-ArgoCD GitOps
-          |
-          ▼
-+----------------------------+
-| AWS EKS     Azure AKS      |
-+----------------------------+
-          |
-Ingress Controller
-          |
-NodeJS Microservices
-          |
-+----------------------------+
-| Prometheus                 |
-| Grafana                    |
-| Loki                       |
-| AlertManager               |
-+----------------------------+
-          |
-+----------------------------+
-| Jira                       |
-| Slack                      |
-| MS Teams                   |
-+----------------------------+
+                               Developers
+                                    │
+                                    ▼
+                            GitHub Repository
+                                    │
+          ┌─────────────────────────┴─────────────────────────┐
+          │                                                   │
+          ▼                                                   ▼
+   GitHub Actions                                       Jenkins
+          │                                                   │
+          └─────────────────────────┬─────────────────────────┘
+                                    ▼
+                           Container Registry
+                         (GHCR / ECR / ACR)
+                                    │
+                                    ▼
+                            ArgoCD GitOps
+                                    │
+            ┌───────────────────────┴───────────────────────┐
+            │                                               │
+            ▼                                               ▼
+        AWS EKS                                         Azure AKS
+    Private Node Groups                             Private Node Pools
+            │                                               │
+            └───────────────────────┬───────────────────────┘
+                                    ▼
+                         Global Traffic Layer
+               Cloudflare / Route53 / Azure Traffic Manager
+                                    │
+                                    ▼
+                            Business Applications
+                                    │
+                                    ▼
+                    Prometheus + Grafana + Loki
+                                    │
+                                    ▼
+                    AlertManager + Slack + Teams
+                                    │
+                                    ▼
+                                 Jira
 ```
 
 ---
 
-## Repository Structure
+# Repository Structure
 
 ```text
-ai-auto-healing-platform/
-│
-├── README.md
-├── .gitignore
+multi-cloud-platform/
 │
 ├── docs/
-│   ├── architecture.md
-│   ├── hld.md
-│   ├── lld.md
-│   ├── deployment.md
-│   ├── runbooks.md
-│   ├── troubleshooting.md
-│   ├── cost-estimation.md
-│   └── diagrams/
-│       ├── hld.drawio
-│       ├── lld.drawio
-│       ├── network.drawio
-│       └── monitoring.drawio
 │
 ├── terraform/
 │   ├── modules/
-│   │   ├── eks/
-│   │   ├── aks/
-│   │   ├── networking/
-│   │   ├── monitoring/
-│   │   └── security/
+│   │   ├── aws-vpc/
+│   │   ├── aws-eks/
+│   │   ├── azure-vnet/
+│   │   ├── azure-aks/
+│   │   └── shared-services/
 │   │
-│   ├── aws/
-│   │   ├── eks.tf
-│   │   ├── vpc.tf
-│   │   ├── variables.tf
-│   │   ├── outputs.tf
-│   │   └── terraform.tfvars
-│   │
-│   └── azure/
-│       ├── aks.tf
-│       ├── network.tf
-│       ├── variables.tf
-│       ├── outputs.tf
-│       └── terraform.tfvars
-│
-├── applications/
-│   ├── user-service/
-│   ├── order-service/
-│   ├── payment-service/
-│   └── notification-service/
+│   └── envs/
+│       ├── dev/
+│       ├── qa/
+│       └── prod/
 │
 ├── kubernetes/
 │   ├── base/
-│   │   ├── deployments/
-│   │   ├── services/
-│   │   ├── ingress/
-│   │   ├── configmaps/
-│   │   └── secrets/
-│   │
 │   ├── overlays/
-│   │   ├── dev/
-│   │   ├── qa/
-│   │   └── prod/
+│   │   ├── eks-dev/
+│   │   ├── aks-dev/
+│   │   ├── eks-prod/
+│   │   └── aks-prod/
 │   │
-│   ├── namespaces/
-│   ├── autoscaling/
+│   ├── ingress/
 │   ├── monitoring/
-│   └── security/
+│   ├── autoscaling/
+│   ├── security/
+│   └── namespaces/
 │
 ├── helm/
-│   ├── application/
-│   ├── prometheus/
-│   ├── grafana/
-│   ├── loki/
-│   └── ingress-nginx/
-│
 ├── argocd/
-│   ├── app-of-apps/
-│   ├── applications/
-│   └── projects/
-│
-├── auto-healing-controller/
-│   ├── src/
-│   ├── tests/
-│   ├── requirements.txt
-│   ├── Dockerfile
-│   └── README.md
-│
 ├── monitoring/
-│   ├── prometheus-rules/
-│   ├── grafana-dashboards/
-│   ├── alertmanager/
-│   └── loki/
-│
 ├── scripts/
-│   ├── bootstrap.sh
-│   ├── install-argocd.sh
-│   ├── install-monitoring.sh
-│   ├── rollback.sh
-│   └── cleanup.sh
-│
-├── .github/
-│   └── workflows/
-│       ├── build.yaml
-│       ├── deploy.yaml
-│       ├── rollback.yaml
-│       ├── terraform-aws.yaml
-│       └── terraform-azure.yaml
-│
-├── jenkins/
-│   ├── Jenkinsfile
-│   └── shared-library/
-│
 ├── tests/
-│   ├── smoke/
-│   ├── integration/
-│   └── chaos/
-│
-├── project-management/
-│   ├── Enterprise_Project_Planner_v4.xlsx
-│   ├── sprint-plan.xlsx
-│   ├── risk-register.xlsx
-│   └── weekly-status-reports/
-│
-└── assets/
-    ├── architecture.png
-    ├── dashboard.png
-    └── demo.gif
+├── .github/workflows/
+└── jenkins/
 ```
 
-### Folder Overview
+---
 
-| Folder                  | Purpose                                                          |
-| ----------------------- | ---------------------------------------------------------------- |
-| docs                    | Project documentation, architecture, deployment guides, runbooks |
-| terraform               | Infrastructure as Code for AWS and Azure                         |
-| applications            | Node.js microservices source code                                |
-| kubernetes              | Kubernetes manifests and overlays                                |
-| helm                    | Helm charts for platform components                              |
-| argocd                  | GitOps applications and projects                                 |
-| auto-healing-controller | Automated remediation service                                    |
-| monitoring              | Prometheus, Grafana, Loki, AlertManager configuration            |
-| scripts                 | Automation and installation scripts                              |
-| .github/workflows       | GitHub Actions CI/CD pipelines                                   |
-| jenkins                 | Jenkins pipelines and shared libraries                           |
-| tests                   | Smoke, integration and chaos testing                             |
-| project-management      | Planning documents and project trackers                          |
-| assets                  | Screenshots, diagrams and demo files                             |
+# Technology Stack
 
-```
-```
-
-
-## Technology Stack
-
-| Category            | Tools                   |
+| Category            | Technology              |
 | ------------------- | ----------------------- |
 | Cloud               | AWS, Azure              |
-| Containerization    | Docker                  |
+| Containers          | Docker                  |
 | Orchestration       | Kubernetes              |
 | Infrastructure      | Terraform               |
 | GitOps              | ArgoCD                  |
@@ -303,215 +229,91 @@ ai-auto-healing-platform/
 | Monitoring          | Prometheus              |
 | Visualization       | Grafana                 |
 | Logging             | Loki                    |
+| Alerts              | AlertManager            |
+| Security            | Trivy, IAM, RBAC        |
 | Notifications       | Slack, Teams            |
 | Incident Management | Jira                    |
-| Security            | Trivy, IAM, RBAC        |
 
 ---
 
-## Auto-Healing Workflow
+# Deployment Strategy
 
-1. Application becomes unhealthy.
-2. Liveness or readiness probe fails.
-3. Prometheus generates alert.
-4. AlertManager triggers notification.
-5. Auto-healing controller evaluates issue.
-6. Platform executes:
-
-   * Pod restart
-   * Deployment restart
-   * Rollback deployment
-   * Redeploy application
-7. Jira incident is created.
-8. Slack and Teams notifications are sent.
-
----
-
-## Auto-Scaling Workflow
-
-1. Traffic increases.
-2. Prometheus metrics exceed threshold.
-3. HPA increases pod replicas.
-4. Cluster Autoscaler adds worker nodes when required.
-5. Traffic normalizes.
-6. Resources scale down automatically.
-
----
-
-## Deployment Strategy
-
-### Environments
+## Environments
 
 * Development
 * QA
 * Production
 
-### Deployment Method
+## Deployment Model
 
-* GitOps with ArgoCD
+* GitOps Driven
+* Multi-Cluster ArgoCD
 * Automated Sync
+* Automated Rollback
 * Self-Healing Enabled
 
 ---
 
-## Monitoring Dashboards
+# Disaster Recovery
 
-### Kubernetes Dashboard
+## Recovery Objectives
 
-Tracks:
+### Recovery Time Objective (RTO)
 
-* Cluster Health
-* Node Utilization
-* Pod Status
-* Resource Consumption
+15 Minutes
 
-### Application Dashboard
+### Recovery Point Objective (RPO)
 
-Tracks:
+5 Minutes
 
-* Request Rate
-* Error Rate
-* Response Time
-* Deployment Status
+## Recovery Strategy
 
-### Auto-Healing Dashboard
-
-Tracks:
-
-* Pod Restarts
-* Rollback Events
-* Scaling Events
-* Incident Metrics
+* Infrastructure as Code
+* GitOps Recovery
+* Cluster Recreation
+* Cross-Cloud Failover
+* Automated Rollback
+* Backup and Restore
 
 ---
 
-## Getting Started
+# Platform Engineering Principles
 
-### Clone Repository
-
-```bash
-git clone git@github.com:vkharishb/Multi-Cloud-Kubernetes-Auto-Healing-Auto-Scaling-Platform.git
-
-cd Multi-Cloud-Kubernetes-Auto-Healing-Auto-Scaling-Platform
-```
-
-### Terraform Deployment
-
-```bash
-cd terraform/aws
-
-terraform init
-terraform plan
-terraform apply
-```
-
-### Kubernetes Deployment
-
-```bash
-kubectl apply -f kubernetes/namespaces/
-
-kubectl apply -f kubernetes/base/
-```
-
-### Install ArgoCD
-
-```bash
-bash scripts/install-argocd.sh
-```
-
-### Install Monitoring Stack
-
-```bash
-bash scripts/install-monitoring.sh
-```
+* Self-Service Deployments
+* Standardized Templates
+* GitOps Operations
+* Automated Infrastructure Provisioning
+* Centralized Observability
+* Secure Secret Management
+* Compliance-Ready Deployments
 
 ---
 
-## Testing
+# Future Enhancements
 
-### Pod Failure Test
+## Phase 5
 
-```bash
-kubectl delete pod <pod-name>
-```
+* Istio Service Mesh
+* Cilium Cluster Mesh
+* Multi-Cluster Service Discovery
 
-Expected Result:
+## Phase 6
 
-* Pod recreated automatically
-* Alert generated
-* Dashboard updated
-
-### HPA Test
-
-```bash
-kubectl run load-generator \
---image=busybox \
--- /bin/sh -c "while true; do wget -q -O- http://service; done"
-```
-
-Expected Result:
-
-* Pod replicas increase
-* Metrics updated
-* HPA event visible
-
----
-
-## Project Roadmap
-
-### Phase 1
-
-* Terraform
-* AWS EKS
-* Azure AKS
-
-### Phase 2
-
-* Docker
-* Kubernetes
-* Helm
-
-### Phase 3
-
-* Monitoring Stack
-* GitHub Actions
-* Jenkins
-
-### Phase 4
-
-* ArgoCD
-* Auto-Healing
-* Incident Management
-
----
-
-## Documentation
-
-Refer to the `/docs` directory for:
-
-* Architecture Design
-* Deployment Guide
-* Runbooks
-* Troubleshooting
-* HLD
-* LLD
-
----
-
-## Future Enhancements
-
+* AI-Driven Auto-Healing
 * Predictive Auto Scaling
-* AI-Based Incident Analysis
-* Service Mesh Integration
-* Multi-Region Disaster Recovery
-* Cost Optimization Dashboard
+* Automated Incident Analysis
+* Cost Optimization Engine
+
+## Phase 7
+
+* Cross-Region Disaster Recovery
+* FinOps Dashboard
+* Kubernetes Fleet Management
 
 ---
 
-## Author
+# Author
 
 Harish Bodapati
 
 DevOps Engineer | Cloud Engineer | Platform Engineering Enthusiast
-
----
