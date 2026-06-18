@@ -1,0 +1,9 @@
+appVersion: apps/v1
+kind: ConfigMap
+metadata:
+  name: app-nodesjs-configmap
+  namespace: app-dev
+  labels:
+    app: app-nodesjs
+    environment: dev
+    platform: multi-cloud

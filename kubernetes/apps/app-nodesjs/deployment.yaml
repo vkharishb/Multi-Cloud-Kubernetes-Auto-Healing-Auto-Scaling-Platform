@@ -1,0 +1,37 @@
+appVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-nodesjs
+  namespace: app-dev
+  labels:
+    app: app-nodesjs
+    environment: dev
+    platform: multi-cloud
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app-nodesjs
+  template:
+    metadata:
+      labels:
+        app: app-nodesjs
+        environment: dev
+        platform: multi-cloud
+    spec:
+      serviceAccountName: app-nodesjs-serviceaccount
+      containers:
+      - name: app-nodesjs-container
+        image: node:20-alpine
+        ports:
+        - containerPort: 3000
+        env:
+        - name: NODE_ENV
+          value: "development"
+          mountPath: /app/config
+      restartPolicy: Always 
+      nodeSelector:
+        cloud: multi-cloud
+        
+
+    

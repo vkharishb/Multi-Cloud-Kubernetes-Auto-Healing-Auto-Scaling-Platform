@@ -1,0 +1,9 @@
+appVersion: v1
+kind: poddisruptionbudget
+metadata:
+  name: app-nodesjs-pdb
+  namespace: app-dev
+  labels:
+    app: app-nodesjs
+    environment: dev
+    platform: multi-cloud

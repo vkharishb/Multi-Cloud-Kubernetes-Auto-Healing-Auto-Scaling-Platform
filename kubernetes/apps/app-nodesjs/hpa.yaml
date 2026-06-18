@@ -1,0 +1,9 @@
+appVersion: v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: app-nodesjs-hpa
+  namespace: app-dev
+  labels:
+    app: app-nodesjs
+    environment: dev
+    platform: multi-cloud

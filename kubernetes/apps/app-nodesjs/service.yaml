@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: service
+Metadata:
+    name: app-nodesjs-service
+  namespace: app-dev
+  labels:
+    app: app-nodesjs
+    environment: dev
+    platform: multi-cloud

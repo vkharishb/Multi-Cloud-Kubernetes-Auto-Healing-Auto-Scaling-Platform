@@ -1,0 +1,9 @@
+appVersion: v1
+kind: ingress
+metadata:
+  name: app-nodesjs-ingress
+  namespace: app-dev
+  labels:
+    app: app-nodesjs
+    environment: dev
+    platform: multi-cloud

@@ -1,0 +1,9 @@
+appVersion: v1
+kind: networkpolicy
+metadata:
+  name: app-nodesjs-networkpolicy
+  namespace: app-dev
+  labels:
+    app: app-nodesjs
+    environment: dev
+    platform: multi-cloud
