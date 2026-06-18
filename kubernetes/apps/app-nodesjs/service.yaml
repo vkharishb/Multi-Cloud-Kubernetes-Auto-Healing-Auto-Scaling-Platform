@@ -1,9 +1,17 @@
 apiVersion: v1
-kind: service
-Metadata:
+kind: Service
+metadata:
     name: app-nodesjs-service
-  namespace: app-dev
+    namespace: app-dev
   labels:
     app: app-nodesjs
     environment: dev
     platform: multi-cloud
+spec:
+  selector:
+    app: app-nodesjs
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+      

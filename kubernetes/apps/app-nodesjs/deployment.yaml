@@ -1,4 +1,4 @@
-appVersion: apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: app-nodesjs
@@ -9,6 +9,11 @@ metadata:
     platform: multi-cloud
 spec:
   replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1       # Bring up 1 new pod before killing the old one
+      maxUnavailable: 0 # Do not allow any pod to go down during the update
   selector:
     matchLabels:
       app: app-nodesjs
@@ -28,10 +33,9 @@ spec:
         env:
         - name: NODE_ENV
           value: "development"
-          mountPath: /app/config
       restartPolicy: Always 
       nodeSelector:
         cloud: multi-cloud
-        
+
 
     

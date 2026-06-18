@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ArgoCDProject
 metadata:
   name: argocd-project
-  namespace: argocd
+  namespace: app-dev
   labels:
     app: argocd
     environment: dev

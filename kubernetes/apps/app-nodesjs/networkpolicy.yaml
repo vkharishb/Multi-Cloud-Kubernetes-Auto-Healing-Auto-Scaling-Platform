@@ -1,5 +1,5 @@
-appVersion: v1
-kind: networkpolicy
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
 metadata:
   name: app-nodesjs-networkpolicy
   namespace: app-dev
@@ -7,3 +7,38 @@ metadata:
     app: app-nodesjs
     environment: dev
     platform: multi-cloud
+spec:
+  podSelector:
+    matchLabels:
+      app: app-nodesjs
+      environment: dev
+      platform: multi-cloud
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: app-nodesjs
+              environment: dev
+              platform: multi-cloud
+      ports:
+        - protocol: TCP
+          port: 3000
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+              app: app-nodesjs
+              environment: dev
+              platform: multi-cloud
+      ports:
+        - protocol: TCP
+          port: 3000
+    - to:
+        - podSelector:
+            matchLabels:
+              app: app-nodesjs
+              environment: dev
+              platform: multi-cloud
