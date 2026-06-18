@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namesapces
+metadata:
+  name: app-dev
+  labels:
+    envrinoment : dev
+    platform: multi-cloud

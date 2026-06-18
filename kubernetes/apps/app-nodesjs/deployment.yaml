@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-nodesjs
+  namespace: app-dev
+  labels:
+    app: app-nodesjs
+    environment: dev
+    platform: multi-cloud
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1       # Bring up 1 new pod before killing the old one
+      maxUnavailable: 0 # Do not allow any pod to go down during the update
+  selector:
+    matchLabels:
+      app: app-nodesjs
+  template:
+    metadata:
+      labels:
+        app: app-nodesjs
+        environment: dev
+        platform: multi-cloud
+    spec:
+      serviceAccountName: app-nodesjs-serviceaccount
+      containers:
+      - name: app-nodesjs-container
+        image: node:20-alpine
+        ports:
+        - containerPort: 3000
+        env:
+        - name: NODE_ENV
+          value: "development"
+      restartPolicy: Always 
+      nodeSelector:
+        cloud: multi-cloud
+
+
+    

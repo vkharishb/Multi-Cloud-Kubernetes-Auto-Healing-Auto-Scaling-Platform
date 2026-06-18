@@ -1,0 +1,9 @@
+apiVersion: apps/v1
+kind: PrometheusRule
+metadata:
+  name: prometheus-rules
+  namespace: app-dev
+  labels:
+    app: prometheus
+    environment: dev
+    platform: multi-cloud

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-nodesjs-configmap
+  namespace: app-dev
+  labels:
+    app: app-nodesjs
+    environment: dev
+    platform: multi-cloud
+data:
+  NODE_ENV: "Dev"
+  Database_URL: "mongodb://mongo:27017/app-nodesjs-db"
+  PORT: "3000"
+  

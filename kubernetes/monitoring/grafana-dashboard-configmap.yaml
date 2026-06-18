@@ -1,0 +1,9 @@
+apiVersion: apps/v1
+kind: GrafanaDashboard
+metadata:
+  name: grafana-dashboard-configmap
+  namespace: app-dev
+  labels:
+    app: grafana
+    environment: dev
+    platform: multi-cloud

@@ -1,0 +1,17 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: app-nodesjs-pdb
+  namespace: app-dev
+  labels:
+    app: app-nodesjs
+    environment: dev
+    platform: multi-cloud
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: app-nodesjs
+      environment: dev
+      platform: multi-cloud
+      

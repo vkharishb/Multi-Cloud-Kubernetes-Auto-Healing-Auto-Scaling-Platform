@@ -1,0 +1,9 @@
+apiVersion: apps/v1
+kind: alertmanagerconfig
+metadata:
+  name: alertmanager-rules
+  namespace: app-dev
+  labels:
+    app: alertmanager
+    environment: dev
+    platform: multi-cloud

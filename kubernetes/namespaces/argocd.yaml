@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ArgoCDProject
+metadata:
+  name: argocd-project
+  namespace: app-dev
+  labels:
+    app: argocd
+    environment: dev
+    platform: multi-cloud

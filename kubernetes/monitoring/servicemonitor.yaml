@@ -1,0 +1,9 @@
+apiVersion: apps/v1
+kind: ServiceMonitor
+metadata:
+  name: servicemonitor
+  namespace: app-dev
+  labels:
+    app: servicemonitor
+    environment: dev
+    platform: multi-cloud
