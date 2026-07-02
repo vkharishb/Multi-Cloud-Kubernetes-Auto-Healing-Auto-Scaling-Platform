@@ -28,7 +28,7 @@ variable "private_subnet_cidrs" {
 variable "region" {
     description = "AWS region to deploy the VPC"
     type        = string
-    default     = "ap-south-2"
+    default     = "ap-south-1"
 }
 
 variable "environment" {
