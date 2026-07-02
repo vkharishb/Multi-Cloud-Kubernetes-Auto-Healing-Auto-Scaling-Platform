@@ -19,11 +19,17 @@ variable "address_space" {
 }
 
 variable "subnets" {
-  description = "A list of subnets to create within the virtual network."
+  description = "Subnets for Azure VNet"
   type = list(object({
     name           = string
     address_prefix = string
   }))
+  default = [
+    {
+      name           = "aks-subnet"
+      address_prefix = "10.20.1.0/24"
+    }
+  ]
 }
 
 variable "tags" {

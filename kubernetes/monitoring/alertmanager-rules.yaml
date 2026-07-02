@@ -1,5 +1,5 @@
-apiVersion: apps/v1
-kind: alertmanagerconfig
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
 metadata:
   name: alertmanager-rules
   namespace: app-dev

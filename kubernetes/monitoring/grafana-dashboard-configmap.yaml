@@ -1,9 +1,7 @@
-apiVersion: apps/v1
-kind: GrafanaDashboard
+apiVersion: v1
+kind: ConfigMap
 metadata:
-  name: grafana-dashboard-configmap
+  name: app-nodesjs-grafana-dashboard
   namespace: app-dev
   labels:
-    app: grafana
-    environment: dev
-    platform: multi-cloud
+    grafana_dashboard: "1"

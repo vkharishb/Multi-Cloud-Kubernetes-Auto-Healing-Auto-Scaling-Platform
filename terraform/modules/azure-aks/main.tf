@@ -18,7 +18,7 @@ module "aks" {
   cluster_name            = var.cluster_name
   location                = var.location
   kubernetes_version      = var.kubernetes_version
-  subnet_ids              = var.subnet_ids
+  vnet_subnet_id          = var.subnet_id
   private_cluster_enabled = true
   network_plugin          = "azure"
   network_policy          = "azure"
