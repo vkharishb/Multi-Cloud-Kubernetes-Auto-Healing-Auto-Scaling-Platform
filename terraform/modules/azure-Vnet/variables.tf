@@ -17,3 +17,17 @@ variable "address_space" {
   description = "The address space that is used by the virtual network."
   type        = list(string)
 }
+
+variable "subnets" {
+  description = "A list of subnets to create within the virtual network."
+  type = list(object({
+    name           = string
+    address_prefix = string
+  }))
+}
+
+variable "tags" {
+  description = "A map of tags to assign to the virtual network and its subnets."
+  type        = map(string)
+  default     = {}
+}

@@ -8,7 +8,7 @@ terraform {
 }
 
 locals {
-  cluster_name = "${var.cluster_name}-${var.env}-eks"
+  cluster_name = var.cluster_name != "" ? var.cluster_name : "${var.cluster_name}-${var.env}-eks"
 }
 
 resource "aws_iam_policy" "cluster_autoscaler" {

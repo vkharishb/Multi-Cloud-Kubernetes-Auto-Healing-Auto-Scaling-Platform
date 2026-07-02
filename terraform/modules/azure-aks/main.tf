@@ -14,11 +14,11 @@ module "aks" {
   version = "~> 11.0"   # pin to a specific major version
 
   # Cluster identity
-  resource_group_name = var.resource_group_name
-  cluster_name         = var.cluster_name
-  location             = var.location
-  kubernetes_version   = var.kubernetes_version
-  vnet_subnet_id      = var.subnet_id
+  resource_group_name     = var.resource_group_name
+  cluster_name            = var.cluster_name
+  location                = var.location
+  kubernetes_version      = var.kubernetes_version
+  subnet_ids              = var.subnet_ids
   private_cluster_enabled = true
   network_plugin          = "azure"
   network_policy          = "azure"

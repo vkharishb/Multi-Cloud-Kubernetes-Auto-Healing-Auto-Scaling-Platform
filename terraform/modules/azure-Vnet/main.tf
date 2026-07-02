@@ -5,5 +5,4 @@ module "Vnet" {
   resource_group_name = var.resource_group_name
   vnet_location       = var.location
   address_space       = var.address_space
-
 }
