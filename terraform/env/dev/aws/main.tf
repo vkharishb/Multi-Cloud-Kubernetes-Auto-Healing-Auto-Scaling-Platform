@@ -9,7 +9,8 @@ module "vpc" {
 
 module "eks" {
   source          = "../../../modules/aws-eks"
-  cluster_name    = "${var.name}-${var.env}-eks-cluster"
+  cluster_name    = var.name
+  env             = var.env
   cluster_version = var.eks_cluster_version
   vpc_id          = module.vpc.vpc_id
   subnets         = module.vpc.private_subnets

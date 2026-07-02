@@ -54,7 +54,7 @@ __pycache__/
 .ruff_cache/
 .venv/
 venv/
-env/*.py
+
 
 # Node / frontend tooling
 node_modules/
