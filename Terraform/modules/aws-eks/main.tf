@@ -7,11 +7,63 @@ terraform {
   }
 }
 
+locals {
+  cluster_name = "${var.cluster_name}-${var.env}-eks"
+}
+
+resource "aws_iam_policy" "cluster_autoscaler" {
+  name        = "${local.cluster_name}-cluster-autoscaler"
+  description = "Allow Kubernetes Cluster Autoscaler to discover and scale EKS managed node groups"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "autoscaling:DescribeAutoScalingGroups",
+          "autoscaling:DescribeAutoScalingInstances",
+          "autoscaling:DescribeLaunchConfigurations",
+          "autoscaling:DescribeScalingActivities",
+          "autoscaling:DescribeTags",
+          "ec2:DescribeImages",
+          "ec2:DescribeInstanceTypes",
+          "ec2:DescribeLaunchTemplateVersions",
+          "ec2:GetInstanceTypesFromInstanceRequirements",
+          "eks:DescribeNodegroup"
+        ]
+        Resource = "*"
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "autoscaling:SetDesiredCapacity",
+          "autoscaling:TerminateInstanceInAutoScalingGroup"
+        ]
+        Resource = "*"
+        Condition = {
+          StringEquals = {
+            "aws:ResourceTag/k8s.io/cluster-autoscaler/enabled"               = "true"
+            "aws:ResourceTag/k8s.io/cluster-autoscaler/${local.cluster_name}" = "owned"
+          }
+        }
+      }
+    ]
+  })
+
+  tags = merge(var.tags, {
+    Environment = var.env
+    Terraform   = "true"
+    ManagedBy   = "terraform"
+    Owner       = "harish"
+  })
+}
+
 module "eks_cluster" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 20.0"
 
-  cluster_name    = "${var.cluster_name}-${var.env}-eks"
+  cluster_name    = local.cluster_name
   cluster_version = var.cluster_version
 
   vpc_id     = var.vpc_id
@@ -51,6 +103,10 @@ module "eks_cluster" {
 
       instance_types = [var.node_instance_type]
 
+      iam_role_additional_policies = {
+        cluster_autoscaler = aws_iam_policy.cluster_autoscaler.arn
+      }
+
       block_device_mappings = {
         xvda = {
           device_name = "/dev/xvda"
@@ -71,8 +127,11 @@ module "eks_cluster" {
       }
 
       tags = merge(var.tags, {
-        Environment = var.env
-        NodeGroup   = "general"
+        Environment                                       = var.env
+        NodeGroup                                         = "general"
+        "k8s.io/cluster-autoscaler/enabled"               = "true"
+        "k8s.io/cluster-autoscaler/${local.cluster_name}" = "owned"
+        "kubernetes.io/cluster/${local.cluster_name}"     = "owned"
       })
     }
   }
@@ -81,6 +140,6 @@ module "eks_cluster" {
     Environment = var.env
     Terraform   = "true"
     ManagedBy   = "terraform"
-    Owner   = "harish"
+    Owner       = "harish"
   })
 }
