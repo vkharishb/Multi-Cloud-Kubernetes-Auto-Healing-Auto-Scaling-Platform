@@ -1,30 +1,29 @@
 terraform {
+  required_version = ">= 1.9"
+
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "=4.1.0"
+      version = ">= 4.48.0, < 5.0"
     }
   }
 }
-#Provider configuration for Azure, specifying the features block which is required for the azurerm provider
-provider "azurerm" {
-  features {}
-}
 
 module "aks" {
-  source = "Azure/aks/azurerm"
+  source  = "Azure/aks/azurerm"
+  version = "~> 11.0"   # pin to a specific major version
 
-  #AKS cluster configuration
-  resource_group_name = var.resource_group_name   #Name of the resource group to create for the AKS cluster
-  cluster_name        = var.cluster_name          #Name of the AKS cluster
-  location            = var.location              #Azure region to deploy the AKS cluster
-  kubernetes_version  = var.kubernetes_version    #Kubernetes version for the AKS cluster
-
-  #Node pool configuration for the AKS cluster
-  default_node_pool = {
-    name       = "default"                      #Name of the default node pool
-    node_count = var.node_count                 #Number of nodes in the default node pool
-    vm_size    = var.vm_size                    #VM size for the nodes in the default node pool
-  }
-
+  # Cluster identity
+  resource_group_name = var.resource_group_name
+  cluster_name         = var.cluster_name
+  location             = var.location
+  kubernetes_version   = var.kubernetes_version
+  vnet_subnet_id      = var.subnet_id
+  private_cluster_enabled = true
+  network_plugin          = "azure"
+  network_policy          = "azure"
+  # Default node pool (flattened variables, not a block)
+  agents_pool_name = "default"
+  agents_count     = var.node_count
+  agents_size      = var.vm_size
 }

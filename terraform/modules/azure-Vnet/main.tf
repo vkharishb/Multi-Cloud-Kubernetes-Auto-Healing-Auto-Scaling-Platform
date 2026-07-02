@@ -1,7 +1,3 @@
-provider "azurerm" {
-  features {}
-}
-
 module "Vnet" {
   source = "Azure/vnet/azurerm"
   version = "3.0.0"

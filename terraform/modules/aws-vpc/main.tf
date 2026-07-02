@@ -7,11 +7,6 @@ terraform {
   }
 }
 
-# Provider configuration for AWS, specifying the region to deploy the EKS cluster
-provider "aws" {
-    region = var.region
-}
-
 module "vpc" {
     source = "terraform-aws-modules/vpc/aws"
     version = "~> 5.0" #U
